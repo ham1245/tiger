@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="col-xs-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+       <div class="panel-image hide-panel-body">
+         <%if current_user.banner_url == nil%>
+             <%= image_tag "/banner.png", class:"panel-image-preview"%>
+         <%else%>
+             <%= image_tag current_user.banner_url, class:"panel-image-preview"%>
+         <%end%>
+       </div>
+        <div class="panel-footer text-center">
+          <div class="row">
+            <div class="col-sm-2">
+              <%if current_user.avatar_url == nil%>
+                  <%= image_tag "/avatar.png", height:"70px", width:"70px", class:"rounded-img profile-photo"%>
+              <%else%>
+                  <%= image_tag current_user.avatar_url, height:"70px", width:"70px", class:"rounded-img profile-photo"%>
+              <%end%>
+            </div>
+            <div class="col-sm-10"><h4 style="text-align: center;"><%= current_user.username %></h4></div>
+            <div class="col-sm-12" style="margin-top: 10px;">
+              <div class="col-sm-3" style="font-size: 75%; opacity: 0.7;">POSTS<br>
+                <h6 ><a href="/user/<%= current_user.username %>", style= "color:#0084B4;font-size: 200%;"><%= current_user.posts.count%></a></h6>
+              </div>
+              <div class="col-sm-5" style="font-size: 75%; opacity: 0.7;">FOLLOWING<br>
+                <h6 ><a href="/following/<%= current_user.username %>", style= "color:#0084B4;font-size: 200%;"><%= current_user.following.count%></a></h6>
+              </div>
+              <div class="col-sm-2" style="font-size: 75%; opacity: 0.7;">FOLLOWERS<br>
+                <h6 ><a href="/followers/<%= current_user.username %>", style= "color:#0084B4;font-size: 200%;"><%= current_user.followers.count%></a></h6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h5 style="color: grey; font-size: 125%;">Trend</h5>
+        <a href="">#Trend #1</a><br>
+        <span style="color: grey;">31k Posts</span><br>
+        <a href="">#Trend #2</a><br>
+        <span style="color: grey;">25k Posts</span><br>
+        <a href="">#Trend #3</a><br>
+        <span style="color: grey;">16k Posts</span><br>
+      </div>
+    </div>
+    -->
+
+  </div>
+
+  <div class="col-xs-6">
+
+
+    <!-- posts of current user itself to -->
+    <div id="postlist">
+      <%= render "components/post_list" %>
+    </div>
+
+    <div class="panel panel-default post-panel">
+      <div class="panel-body row">
+        <div class="col-sm-12">
+        <center><img src="/icon.jpg" height="25px" width="25px">
+          <a href="#top"><p class="opacity: 0.7;">Back to Top <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></p></a></center>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="col-xs-3">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p style="opacity: 0.5; font-size: 90%;">@ 2016 Tiger  About  Help  Terms  Privacy  Cookies  Ads info  Brand  Blog  Status  Apps  Jobs  Advertise  Businesses  Media  Developers</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/YJaySun/COSC617.git/!svn/ver/7/trunk/test/models
+END
+view_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/YJaySun/COSC617.git/!svn/ver/7/trunk/test/models/view_test.rb
+END
+model_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/YJaySun/COSC617.git/!svn/ver/7/trunk/test/models/model_test.rb
+END
+user_test.rb
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/YJaySun/COSC617.git/!svn/ver/7/trunk/test/models/user_test.rb
+END

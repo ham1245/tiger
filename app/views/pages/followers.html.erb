@@ -1,0 +1,75 @@
+<!-- New Row-->
+<div class="row">
+  <div class="col-xs-3">
+    <div class="col-sm-12" style="margin-top: -200px;">
+      <%if User.find_by_username(params[:id]).avatar_url == nil%>
+          <%= image_tag "/avatar.png", height:"200px", width:"200px", class:"rounded-img profile-photo"%>
+      <%else%>
+          <%= image_tag User.find_by_username(params[:id]).avatar_url, height:"200px", width:"200px", class:"rounded-img profile-photo"%>
+      <%end%>
+    </div>
+    <div class="col-sm-12">
+      <h3 style="font-weight: bold;"><%= params[:id] %></h3>
+      <span style="opacity: 0.5;"><%= User.find_by_username(params[:id]).email %></span>
+      <br><br>
+      <%= User.find_by_username(params[:id]).bio %>
+      <br><br>
+      <span class="glyphicon glyphicon-calendar" aria-hidden="true" style="opacity: 0.5;"></span>
+      Joined <%= User.find_by_username(params[:id]).created_at.to_date %>
+      <br><br>
+    </div>
+
+    <div class="col-sm-12">
+
+      <%= render '/components/who_to_follow' %>
+
+      <!--
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h5 style="color: grey; font-size: 125%;">Trend</h5>
+          <a href="">#Trend #1</a><br>
+          <span style="color: grey;">31k Posts</span><br>
+          <a href="">#Trend #2</a><br>
+          <span style="color: grey;">25k Posts</span><br>
+          <a href="">#Trend #3</a><br>
+          <span style="color: grey;">16k Posts</span><br>
+        </div>
+      </div> -->
+    </div>
+  </div>
+  <div class="col-xs-8">
+    <br>
+    <% User.find_by_username(params[:id]).followers.each do |follower| %>
+        <div class="panel panel-default" >
+          <div class="panel-body row">
+            <div style="border-bottom: 0.1px solid #DADADA; ">
+              <%if follower.banner_url == nil%>
+                  <%= image_tag "/banner.png", height:"150px", width:"615px", class:"rounded-img"%>
+              <%else%>
+                  <%= image_tag follower.banner_url, height:"150px", width:"615px", class:"rounded-img"%>
+              <%end%>
+            </div>
+            <div class="col-sm-12" style="margin-top: -50px; margin-left: 20px;">
+              <%if follower.avatar_url == nil%>
+                  <%= image_tag "/avatar.png", height:"120px", width:"120px", class:"rounded-img profile-photo"%>
+              <%else%>
+                  <%= image_tag follower.avatar_url, height:"120px", width:"120px", class:"rounded-img profile-photo"%>
+              <%end%>
+            </div>
+            <div class="col-sm-12" style="margin-top: -40px; margin-left: 100px;">
+              <%= render 'components/follow_button', :user => follower %>
+            </div>
+            <div class="col-sm-12">
+              <h3 style="font-weight: bold;"><a href="/user/<%= follower.username %>" class="post-owner"><%= follower.username %></a></h3>
+              <span style="opacity: 0.5;"><%= follower.email %></span>
+              <%if current_user == User.find_by_username(params[:id])%>
+                <span style="opacity: 0.7; font-weight: bold; margin-left: 50px;">FOLLOWS YOU</span>
+              <%end%>
+              <br><br>
+              <%= follower.bio %>
+            </div>
+          </div>
+        </div>
+    <%end%>
+  </div>
+</div>

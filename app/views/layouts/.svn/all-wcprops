@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/YJaySun/COSC617.git/!svn/ver/7/trunk/app/views/layouts
+END
+application.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/YJaySun/COSC617.git/!svn/ver/7/trunk/app/views/layouts/application.html.erb
+END
+_nav_guest.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/YJaySun/COSC617.git/!svn/ver/7/trunk/app/views/layouts/_nav_guest.html.erb
+END
+_nav_users.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/YJaySun/COSC617.git/!svn/ver/7/trunk/app/views/layouts/_nav_users.html.erb
+END
+_nav.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/YJaySun/COSC617.git/!svn/ver/7/trunk/app/views/layouts/_nav.html.erb
+END

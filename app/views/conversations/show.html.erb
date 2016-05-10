@@ -1,0 +1,54 @@
+<br><br>
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <h2>
+      <span>A Conversation with</span>
+      <% @conversation.participants.each do |participant| %>
+        <% if participant != current_user %>
+
+              <%if participant.avatar_url == nil%>
+                  <%= image_tag "/avatar.png", height:"50px", width:"50px", class:"rounded-img"%>
+              <%else%>
+                  <%= image_tag participant.avatar_url, height:"50px", width:"50px", class:"rounded-img"%>
+              <%end%>
+
+              <a style="font-weight: bold;opacity: 0.85;" href="/user/<%= participant.username %>"><%= participant.username %></a>
+        <% end %>
+      <% end %>
+      <br><br>
+      Subject: <span style="color: #0084B4;"><%= @conversation.subject %></span>
+    </h2>
+
+
+
+    <br/>
+    <ul>
+      <%= content_tag_for(:li, @conversation.receipts_for(current_user)) do |receipt| %>
+        <% message = receipt.message %>
+        <br/>
+        <b>
+          <%if message.sender.avatar_url == nil%>
+              <%= image_tag "/avatar.png", height:"50px", width:"50px", class:"rounded-img"%>
+          <%else%>
+              <%= image_tag message.sender.avatar_url, height:"50px", width:"50px", class:"rounded-img"%>
+          <%end%>
+          <a style="font-size: 20px; font-weight: bold;opacity: 0.85;" href="/user/<%= message.sender.username %>"><%= message.sender.username %></a>
+        </b>
+        <p>
+          <h4><%= simple_format h message.body %></h4>
+        </p>
+          <span style="opacity: 0.5;">
+        <span class="timestamp">Sent</span>
+        <span class="timestamp">
+          <%= time_ago_in_words(message.updated_at) %>
+        </span>
+        <span class="timestamp">ago.</span>
+            </span>
+        <br/>
+      <% end %>
+      <br/>
+    </ul>
+    <%= render 'messages/form', conversation: @conversation %>
+  </div>
+</div>

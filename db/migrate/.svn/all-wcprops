@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/YJaySun/COSC617.git/!svn/ver/7/trunk/db/migrate
+END
+20160311172511_devise_create_views.rb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/YJaySun/COSC617.git/!svn/ver/7/trunk/db/migrate/20160311172511_devise_create_views.rb
+END
+20160312001837_add_username_to_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/YJaySun/COSC617.git/!svn/ver/7/trunk/db/migrate/20160312001837_add_username_to_users.rb
+END
+20160311171217_devise_create_models.rb
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/YJaySun/COSC617.git/!svn/ver/7/trunk/db/migrate/20160311171217_devise_create_models.rb
+END
+20160311172634_devise_create_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/YJaySun/COSC617.git/!svn/ver/7/trunk/db/migrate/20160311172634_devise_create_users.rb
+END

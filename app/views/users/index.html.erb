@@ -1,0 +1,47 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+		<br><br>
+		<p><h2>Users</h2></p>
+    <br>
+
+
+		<!--<p class="lead">Click on a name to send that user a message!</p>
+    <ul>
+      <% @users.each do |f| %>
+          <p class = "lead"><%= link_to f.username, new_message_path(:user => f.id) %></p>
+      <% end %>
+    </ul>-->
+
+
+      <% for user in @users%>
+        <%if current_user != user%>
+            <div class="row">
+              <div class="col-sm-1">
+                <%if user.avatar_url == nil%>
+                   <%= image_tag "/avatar.png", height:"50px", width:"50px", class:"rounded-img"%>
+                <%else%>
+                   <%= image_tag user.avatar_url, height:"50px", width:"50px", class:"rounded-img"%>
+               <%end%>
+              </div>
+              <h2>
+                <div class="col-sm-2">
+                  <span style="font-weight: bold;opacity: 0.85;"><a href="/user/<%= user.username %>"><%= user.username %></a></span>
+                </div>
+                <div class="col-sm-3">
+                  <span style="opacity: 0.5; font-size: medium;"><%= user.email %></span>
+                </div>
+                <div class="col-sm-3">
+                   <%= link_to 'send message', new_message_path(:user => user.id), style:"opacity: 0.9; font-size: 20px;"%>
+               </div>
+              </h2>
+           </div>
+        <%end%>
+      <%end%>
+
+
+	</div>
+	 <%= will_paginate @users %>
+
+
+
+</div>

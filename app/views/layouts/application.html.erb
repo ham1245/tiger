@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tiger</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%= render 'layouts/nav'%>
+
+<% if params[:id] != nil %>
+    <% @profileURL = '/user/' + params[:id] %>
+    <% @followingURL = '/following/' + params[:id] %>
+    <% @followersURL = '/followers/' + params[:id] %>
+  <% if current_page?(@profileURL) || current_page?(@followingURL) || current_page?(@followersURL)%>
+
+        <%if User.find_by_username(params[:id]).banner_url == nil%>
+            <%= image_tag "/banner.png", class:"profile-banner"%>
+        <%else%>
+            <%= image_tag User.find_by_username(params[:id]).banner_url, class:"profile-banner"%>
+        <%end%>
+
+        <div class="row">
+          <div class="col-sm-12" style="background-color: white;">
+            <div class="container">
+              <div class="col-sm-3">$nbsp;</div>
+              <div class="col-sm-6" style="margin-top: 5px;">
+                <div class="col-sm-2
+                <%if current_page?(@profileURL) %>
+                    highlight
+                <%end%>
+                " style="font-size: 100%; opacity: 0.7;">POSTS<br>
+                  <h6 ><a href="/user/<%= User.find_by_username(params[:id]).username %>", style= "color:#0084B4;font-size: 200%;"><%= User.find_by_username(params[:id]).posts.count%></a></h6>
+                </div>
+                <div class="col-sm-3
+                 <%if current_page?(@followingURL) %>
+                    highlight
+                <%end%>
+                " style="font-size: 100%; opacity: 0.7;">FOLLOWING<br>
+                  <h6 ><a href="/following/<%= User.find_by_username(params[:id]).username %>", style= "color:#0084B4;font-size: 200%;"><%= User.find_by_username(params[:id]).following.count%></a></h6>
+                </div>
+                <div class="col-sm-2
+                 <%if current_page?(@followersURL) %>
+                    highlight
+                <%end%>
+                " style="font-size: 100%; opacity: 0.7;">FOLLOWERS<br>
+                  <h6 ><a href="/followers/<%= User.find_by_username(params[:id]).username %>", style= "color:#0084B4;font-size: 200%;"><%= User.find_by_username(params[:id]).followers.count%></a></h6>
+                </div>
+                <% if user_signed_in?%>
+                    <%if current_user == User.find_by_username(params[:id])%>
+                        <div class="col-sm-5" style="text-align: right; margin-top: 5px;"><a href="/users/edit"><li type="button" class="btn btn-default" style="color: grey; opacity: 0.8; font-weight: bold;">EDIT PROFILE</li></a></div>
+                    <%else%>
+                        <div class="col-sm-5" style="text-align: right; margin-top: 5px;">
+                        <%= render 'components/follow_button', :user => User.find_by_username(params[:id]) %>
+                        </div>
+                    <%end%>
+                <%end%>
+              </div>
+            </div>
+          </div>
+        </div>
+  <%end%>
+<%end%>
+
+<div class="container">
+  <span class="notice"><%= notice %></span>
+  <span class="alert"><%= alert %></span>
+<%= yield %>
+</div>
+
+</body>
+</html>

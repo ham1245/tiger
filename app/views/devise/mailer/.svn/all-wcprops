@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/YJaySun/COSC617.git/!svn/ver/7/trunk/app/views/devise/mailer
+END
+unlock_instructions.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/YJaySun/COSC617.git/!svn/ver/7/trunk/app/views/devise/mailer/unlock_instructions.html.erb
+END
+confirmation_instructions.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/YJaySun/COSC617.git/!svn/ver/7/trunk/app/views/devise/mailer/confirmation_instructions.html.erb
+END
+reset_password_instructions.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/YJaySun/COSC617.git/!svn/ver/7/trunk/app/views/devise/mailer/reset_password_instructions.html.erb
+END
+password_change.html.erb
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/YJaySun/COSC617.git/!svn/ver/7/trunk/app/views/devise/mailer/password_change.html.erb
+END

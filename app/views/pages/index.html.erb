@@ -1,0 +1,76 @@
+<% if !user_signed_in? # if the user is not singed in, render this %>
+    <style>
+      body{
+        background: linear-gradient( /* somewhat transparent film on top of the BG to make it look darker. */
+            rgba(0,0,0, 0.5),
+            rgba(0,0,0, 0.5)
+        ), url("/bg.jpg") no-repeat center center fixed
+
+      ; /* only display once, center horizontal and vertical, don't let scroll change position. */
+        -webkit-background-size: cover;
+        -moz-background-size: cover; /* cover the whole html element. */
+        -o-background-size: cover;
+        background-size: cover;
+      }
+        h1 {
+          color: white;
+          font-weight: bold;
+        }
+        .container-index{
+          margin-right:15%;
+          margin-left:15%;
+        }
+        .text{
+          color:white;
+          font-weight: 300;
+          font-size: 150%;
+        }
+        .footer-links{
+          text-align: center;
+          color:white;
+          margin-top:30%;
+          font-size:85%;
+        }
+        .log-in{
+          float:right;
+          width:300px;
+          height:150px;
+          margin-top: 7.5%;
+        }
+        .sign-up{
+          float:right;
+          width:300px;
+          height:250px;
+        }
+    </style>
+
+    <div class = "container-index row">
+      <div class="col-sm-6">
+        <h1>Welcome to Tiger</h1>
+        <p class="text">
+          Connect with your buddies. Chat with new friends.<br>
+          Share your adventures. Have fun!<br>
+          Just like a blog, but with less characters!
+        </p>
+      </div>
+      <div class="col-sm-6">
+        <div class="log-in panel">
+
+
+          <%= link_to('Sign In', new_user_session_path, type:"button", class:"btn btn-primary navbar-btn", style:"margin-left: 50px; margin-top: 50px;") %>
+          <%= link_to('Sign Up', new_user_registration_path, type:"button", class:"btn btn-primary navbar-btn", style:"margin-left: 50px; margin-top: 50px;")%>
+        </div>
+      <!--  <div class="sign-up panel">
+
+        </div> -->
+      </div>
+
+      <div class="col-sm-12">
+        <p class="footer-links">About  Help  Blog  Status  Jobs  Terms  Privacy  Cookies  Ads  infor  Brand  Advertise  Businesses  Media  Developers  Directory @ 2016 Tiger
+      </div>
+    </div>
+<% else # is the user IS signed in, render the folowing%>
+
+<script>document.location = "/home"</script>
+
+<% end %>

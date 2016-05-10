@@ -1,0 +1,200 @@
+<% @homeURL = '/home'%>
+<% @exploreURL = '/explore'%>
+<% if params[:id] != nil %>
+<% @profileURL = '/user/' + params[:id] %>
+<%end%>
+
+
+<!-- home page -->
+<%if   session[:current_url]  == @homeURL %>
+
+    <%= render '/components/post_form' %><br><br>
+
+
+    <% current_user.posts.each do |p| %>
+
+        <div class="panel panel-default post-panel">
+          <div class="panel-body row">
+
+            <div class="col-sm-1">
+              <%if current_user.avatar_url == nil%>
+                  <%= image_tag "/avatar.png", height:"50px", width:"50px", class:"rounded-img"%>
+              <%else%>
+                  <%= image_tag current_user.avatar_url, height:"50px", width:"50px", class:"rounded-img"%>
+              <%end%>
+            </div>
+            <div class="col-sm-11">
+              <p class="post-title"><a href="/user/<%= User.find(p.user_id).username %>" class="post-owner"><%= User.find(p.user_id).username %></a> <span class="post-creation">- <%= p.created_at.to_formatted_s(:short) %></span></p>
+              <p class="post-content"><%= p.content %></p>
+            </div>
+            <div class="col-sm-12">
+              <p class="post-links">
+                <!-- <span class="glyphicon glyphicon-comment g-links" aria-hidden="true"></span>-->
+                <%= link_to t('_'),
+                            retweet_path(p),  :data => { :confirm =>  'Retweet ?' }, :class => 'glyphicon glyphicon-retweet g-links' %>
+                <%if p.likes == nil
+                    @likesNum = 0
+                  else
+                    @likesNum = p.likes
+                  end%>
+                <%= link_to t( @likesNum ),
+                            like_path(p), :class => 'glyphicon glyphicon-heart g-links' %>
+                <!-- <span class="glyphicon glyphicon-option-horizontal g-links" aria-hidden="true"></span> -->
+                <!-- <a href=""> View conversation </a>-->
+              </p>
+            </div>
+
+          </div>
+        </div>
+    <%end%>
+
+
+
+    <!-- posts of users who current user is following to -->
+    <% current_user.following.each do |followed| %>
+        <% followed.posts.each do |p| %>
+
+            <div class="panel panel-default post-panel">
+              <div class="panel-body row">
+
+                <div class="col-sm-1">
+                  <%if User.find(p.user_id).avatar_url == nil%>
+                      <%= image_tag "/avatar.png", height:"50px", width:"50px", class:"rounded-img"%>
+                  <%else%>
+                      <%= image_tag User.find(p.user_id).avatar_url, height:"50px", width:"50px", class:"rounded-img"%>
+                  <%end%>
+                </div>
+                <div class="col-sm-11">
+                  <p class="post-title"><a href="/user/<%= User.find(p.user_id).username %>" class="post-owner"><%= User.find(p.user_id).username %></a> <span class="post-creation">- <%= p.created_at.to_formatted_s(:short) %></span></p>
+                  <p class="post-content"><%= p.content %></p>
+                </div>
+                <div class="col-sm-12">
+                  <p class="post-links">
+                    <!-- <span class="glyphicon glyphicon-comment g-links" aria-hidden="true"></span>-->
+                    <%= link_to t('_'),
+                                retweet_path(p),  :data => { :confirm =>  'Retweet ?' }, :class => 'glyphicon glyphicon-retweet g-links' %>
+                    <%if p.likes == nil
+                        @likesNum = 0
+                      else
+                        @likesNum = p.likes
+                      end%>
+                    <%= link_to t( @likesNum ),
+                                like_path(p), :class => 'glyphicon glyphicon-heart g-links' %>
+                    <!-- <span class="glyphicon glyphicon-option-horizontal g-links" aria-hidden="true"></span> -->
+                    <!-- <a href=""> View conversation </a>-->
+                  </p>
+                </div>
+
+              </div>
+            </div>
+        <%end%>
+    <% end %>
+
+<%end%>
+
+<!-- explore page-->
+<%if  session[:current_url] == @exploreURL%>
+
+    <% if user_signed_in? %><%= render '/components/post_form' %><br><% end %><br>
+
+    <% for @p in @posts %>
+        <div class="panel panel-default post-panel">
+          <div class="panel-body row">
+
+            <div class="col-sm-1">
+              <%if User.find(@p.user_id).avatar_url == nil%>
+                  <%= image_tag "/avatar.png", height:"50px", width:"50px", class:"rounded-img"%>
+              <%else%>
+                  <%= image_tag User.find(@p.user_id).avatar_url, height:"50px", width:"50px", class:"rounded-img"%>
+              <%end%>
+            </div>
+            <div class="col-sm-11">
+              <p class="post-title"><a href="/user/<%= User.find(@p.user_id).username %>" class="post-owner"><%= User.find(@p.user_id).username %></a> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
+              <p class="post-content"><%= @p.content %></p>
+            </div>
+            <div class="col-sm-12">
+              <p class="post-links">
+                <!-- <span class="glyphicon glyphicon-comment g-links" aria-hidden="true"></span>-->
+                <%= link_to t('_'),
+                            retweet_path(@p), :data => { :confirm =>  'Retweet ?' }, :class => 'glyphicon glyphicon-retweet g-links' %>
+                <%if @p.likes == nil
+                    @likesNum = 0
+                  else
+                    @likesNum = @p.likes
+                  end%>
+                <%= link_to t( @likesNum ),
+                            like_path(@p), :class => 'glyphicon glyphicon-heart g-links' %>
+                <!-- <span class="glyphicon glyphicon-option-horizontal g-links" aria-hidden="true"></span> -->
+                <!-- <a href=""> View conversation </a> -->
+              </p>
+            </div>
+
+          </div>
+        </div>
+    <% end %>
+
+<%end%>
+
+<!--profile page-->
+<%if  session[:current_url] == @profileURL %>
+
+    <%if current_user == User.find_by_username(@username)%>
+        <%= render 'components/post_form'%><br><br>
+    <%else%>
+        <span class="panel panel-default post-form-panel"></span>
+    <%end%>
+
+    <% for @p in @posts %>
+        <div class="panel panel-default post-panel">
+          <div class="panel-body row">
+
+            <div class="col-sm-1">
+              <%if User.find(@p.user_id).avatar_url == nil%>
+                  <%= image_tag "/avatar.png", height:"50px", width:"50px", class:"rounded-img"%>
+              <%else%>
+                  <%= image_tag User.find(@p.user_id).avatar_url, height:"50px", width:"50px", class:"rounded-img"%>
+              <%end%>
+            </div>
+            <div class="col-sm-11">
+              <p class="post-title"><a href="/user/<%= User.find(@p.user_id).username %>" class="post-owner"><%= User.find(@p.user_id).username %></a> <span class="post-creation">- <%= @p.created_at.to_formatted_s(:short) %></span></p>
+              <p class="post-content"><%= @p.content %></p>
+            </div>
+            <div class="col-sm-12">
+              <p class="post-links">
+                <!-- <span class="glyphicon glyphicon-comment g-links" aria-hidden="true"></span> -->
+
+                <%if current_user == User.find_by_username(@username)%>
+                    <span class="glyphicon glyphicon-retweet g-links" aria-hidden="true"></span>
+                <%else%>
+                    <%= link_to t('_'),
+                                retweet_path(@p), :data => { :confirm =>  'Retweet ?' },:class => 'glyphicon glyphicon-retweet g-links' %>
+                <%end%>
+
+
+                <%if @p.likes == nil
+                    @likesNum = 0
+                  else
+                    @likesNum = @p.likes
+                  end%>
+                <%= link_to t( @likesNum ),
+                            like_path(@p), :class => 'glyphicon glyphicon-heart g-links' %>
+                <!--   <span class="glyphicon glyphicon-option-horizontal g-links" aria-hidden="true"></span> -->
+
+
+                <%if current_user == User.find_by_username(@username)%>
+                    <%= link_to t('_'),
+                                (destroy_path(@p)),
+
+                                :data => { :confirm =>  'Remove this tweet ?' },
+                                :class => 'glyphicon glyphicon-trash g-links' %>
+                <%end%>
+                <!--  <a href=""> View conversation </a> -->
+              </p>
+            </div>
+
+          </div>
+        </div>
+    <% end %>
+
+<%end%>
+

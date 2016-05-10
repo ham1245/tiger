@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/YJaySun/COSC617.git/!svn/ver/7/trunk/test/fixtures
+END
+users.yml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/YJaySun/COSC617.git/!svn/ver/7/trunk/test/fixtures/users.yml
+END
+models.yml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/YJaySun/COSC617.git/!svn/ver/7/trunk/test/fixtures/models.yml
+END
+views.yml
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/YJaySun/COSC617.git/!svn/ver/7/trunk/test/fixtures/views.yml
+END
